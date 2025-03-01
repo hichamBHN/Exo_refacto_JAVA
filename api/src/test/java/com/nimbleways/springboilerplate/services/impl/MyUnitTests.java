@@ -1,4 +1,4 @@
-package com.nimbleways.springboilerplate.services.implementations;
+package com.nimbleways.springboilerplate.services.impl;
 
 import com.nimbleways.springboilerplate.entities.Product;
 import com.nimbleways.springboilerplate.repositories.ProductRepository;
@@ -22,7 +22,7 @@ public class MyUnitTests {
     @Mock
     private ProductRepository productRepository;
     @InjectMocks 
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     @Test
     public void test() {
