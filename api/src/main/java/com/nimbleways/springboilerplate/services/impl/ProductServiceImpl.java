@@ -36,11 +36,7 @@ public class ProductServiceImpl implements ProductService {
                 && p.getAvailable() > 0)) {
             p.setAvailable(p.getAvailable() - 1);
             save(p);
-        } else if ((LocalDate.now().isAfter(p.getSeasonStartDate()) && LocalDate.now().isBefore(p.getSeasonEndDate())
-                && p.getAvailable() > 0)) {
-            p.setAvailable(p.getAvailable() - 1);
-            save(p);
-        } else if (LocalDate.now().plusDays(p.getLeadTime()).isAfter(p.getSeasonEndDate())) {
+        }  else if (LocalDate.now().plusDays(p.getLeadTime()).isAfter(p.getSeasonEndDate())) {
             ns.sendOutOfStockNotification(p.getName());
             p.setAvailable(0);
             save(p);
@@ -58,9 +54,6 @@ public class ProductServiceImpl implements ProductService {
     public void handleExpiredProduct(Product p) {
         log.info("Handle expired product : {}", p.getName());
         if (p.getAvailable() > 0 && p.getExpiryDate().isAfter(LocalDate.now())) {
-            p.setAvailable(p.getAvailable() - 1);
-            save(p);
-        } else if (p.getAvailable() > 0 && p.getExpiryDate().isAfter(LocalDate.now())) {
             p.setAvailable(p.getAvailable() - 1);
             save(p);
         } else {
